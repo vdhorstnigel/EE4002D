@@ -25,8 +25,8 @@ client.on('message', (topic, message) => {
     document.querySelector('#ethylene .value').textContent = `${data.Ethylene} ppm`;
   });
   
-  // Subscribe to topics
-  client.on('connect', () => {
-    client.subscribe('values');
-    console.log('Connected to MQTT broker!');
-  });
+// Subscribe to topics
+client.on('connect', () => {
+  client.subscribe('values');
+  console.log('Connected to MQTT broker!');
+});
