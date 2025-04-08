@@ -15,7 +15,6 @@ client.on('message', (topic, message) => {
     console.log('Received message on topic:', topic, 'with data:', data); // Log the received message
 
     if (topic === 'esp32/values') {
-      console.log('Updating sensor values, ${data.Ethanol}');
       document.querySelector('#ethanol .value').textContent = `${data.Ethanol} ppm`;
       document.querySelector('#ammonia .value').textContent = `${data.Ammonia} ppm`;
       document.querySelector('#hydrogen-sulfide .value').textContent = `${data["Hydrogen Sulfide"]} ppm`;
