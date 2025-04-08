@@ -1,8 +1,7 @@
-const mqtt = require("mqtt") 
-const client = mqtt.connect('wss://x2124b00.ala.asia-southeast1.emqxsl.com:8883', {
-    username: 'ESP32',
-    password: 'Password1234!'
-  });
+const client = mqtt.connect('wss://x2124b00.ala.asia-southeast1.emqxsl.com:8084/mqtt', {
+  username: 'ESP32',
+  password: 'Password1234!'
+});
   
 client.on('connect', () => {
 console.log('Connected!');
