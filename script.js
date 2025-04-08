@@ -3,7 +3,6 @@ const client = mqtt.connect('wss://x2124b00.ala.asia-southeast1.emqxsl.com:8084/
   password: 'Password1234!'
 });
 
-// Subscribe to topics
 client.on('connect', () => {
   client.subscribe('esp32/values');
   client.subscribe('esp32/state')
@@ -16,7 +15,7 @@ client.on('message', (topic, message) => {
     console.log('Received message on topic:', topic, 'with data:', data); // Log the received message
 
     if (topic === 'values') {
-      console.log('Updating sensor values');
+      console.log('Updating sensor values', `${data.Ethanol}');
       document.querySelector('#ethanol .value').textContent = `${data.Ethanol} ppm`;
       document.querySelector('#ammonia .value').textContent = `${data.Ammonia} ppm`;
       document.querySelector('#hydrogen-sulfide .value').textContent = `${data["Hydrogen Sulfide"]} ppm`;
