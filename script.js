@@ -5,8 +5,8 @@ const client = mqtt.connect('wss://x2124b00.ala.asia-southeast1.emqxsl.com:8084/
 
 // Subscribe to topics
 client.on('connect', () => {
-  client.subscribe('values');
-  client.subscribe('state')
+  client.subscribe('esp32/values');
+  client.subscribe('esp32/state')
   console.log('Connected to MQTT broker!');
 });
 
@@ -15,14 +15,14 @@ client.on('message', (topic, message) => {
     const data = JSON.parse(message.toString());
     
     // Update each sensor box
-    if (topic === 'values') {
+    if (topic === 'esp32/values') {
       // Sensor values
       document.querySelector('#ethanol .value').textContent = `${data.Ethanol} ppm`;
       document.querySelector('#ammonia .value').textContent = `${data.Ammonia} ppm`;
       document.querySelector('#hydrogen-sulfide .value').textContent = `${data["Hydrogen Sulfide"]} ppm`;
       document.querySelector('#ethylene .value').textContent = `${data.Ethylene} ppm`;
     }
-    if (topic === 'state') {
+    if (topic === 'esp32/state') {
       // Food classification
       const foodInfoEl = document.getElementById('foodInfo');
       const state = data["State"];
