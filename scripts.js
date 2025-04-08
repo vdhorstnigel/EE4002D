@@ -4,6 +4,17 @@ const client = mqtt.connect('wss://x2124b00.ala.asia-southeast1.emqxsl.com:8883'
     password: 'Password1234!'
   });
   
+client.on('connect', () => {
+console.log('Connected!');
+client.subscribe('values', (err) => {
+    if (err) {
+    console.error('Subscribe error:', err);
+    } else {
+    console.log('Subscribed to values topic!');
+    }
+});
+});
+
 // Update UI when MQTT message arrives
 client.on('message', (topic, message) => {
     const data = JSON.parse(message.toString());
