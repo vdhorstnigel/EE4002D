@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gas Sensor Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mqtt/4.3.7/mqtt.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Electronic Nose</h1>
+    
+    <div class="sensor-box" id="ethanol">
+      <h2>Ethanol</h2>
+      <p class="value">0 ppm</p>
+    </div>
+    
+    <div class="sensor-box" id="ammonia">
+      <h2>Ammonia</h2>
+      <p class="value">0 ppm</p>
+    </div>
+    
+    <div class="sensor-box" id="hydrogen-sulfide">
+      <h2>Hydrogen Sulfide</h2>
+      <p class="value">0 ppm</p>
+    </div>
+    
+    <div class="sensor-box" id="ethylene">
+      <h2>Ethylene</h2>
+      <p class="value">0 ppm</p>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
