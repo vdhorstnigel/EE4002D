@@ -10,29 +10,33 @@ client.on('connect', () => {
   console.log('Connected to MQTT broker!');
 });
 
-// Update UI when MQTT message arrives
 client.on('message', (topic, message) => {
+  try {
     const data = JSON.parse(message.toString());
-    
-    // Update each sensor box
-    if (topic === 'esp32/values') {
-      // Sensor values
+    console.log('Received message on topic:', topic, 'with data:', data); // Log the received message
+
+    if (topic === 'values') {
+      console.log('Updating sensor values');
       document.querySelector('#ethanol .value').textContent = `${data.Ethanol} ppm`;
       document.querySelector('#ammonia .value').textContent = `${data.Ammonia} ppm`;
       document.querySelector('#hydrogen-sulfide .value').textContent = `${data["Hydrogen Sulfide"]} ppm`;
       document.querySelector('#ethylene .value').textContent = `${data.Ethylene} ppm`;
     }
-    if (topic === 'esp32/state') {
-      // Food classification
+
+    if (topic === 'state') {
+      console.log('Updating food state');
       const foodInfoEl = document.getElementById('foodInfo');
       const state = data["State"];
       foodInfoEl.textContent = `${data["Type of Food"]}: ${data["Specific food"]} (${state})`;
 
       // Optional color based on state
+      foodInfoEl.classList.remove("green", "orange", "red"); // Remove any old color classes
       if (state === "Fresh") foodInfoEl.classList.add("green");
       else if (state === "Spoiling") foodInfoEl.classList.add("orange");
       else if (state === "Spoilt") foodInfoEl.classList.add("red");
     }
-    
-  });
-  
+  } catch (error) {
+    console.error('Error parsing message data:', error);
+  }
+});
+
