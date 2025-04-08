@@ -45,3 +45,7 @@ body {
       font-size: 1.5rem;
     }
   }
+
+#foodInfo.green { color: green; }
+#foodInfo.orange { color: orange; }
+#foodInfo.red { color: red; }
