@@ -25,7 +25,7 @@ client.on('message', (topic, message) => {
     if (topic === 'test') {
       document.querySelector('#ethanol .value').textContent = `${data.etoh}`;
       document.querySelector('#ammonia .value').textContent = `${data.nh3}`;
-      document.querySelector('#hydrogen-sulfide .value').textContent = `${data"h2s"}`;
+      document.querySelector('#hydrogen-sulfide .value').textContent = `${data.h2s}`;
       document.querySelector('#ethylene .value').textContent = `${data.c2h4}`;
     }
 
