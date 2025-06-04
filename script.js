@@ -5,7 +5,8 @@ const client = mqtt.connect('wss://x2124b00.ala.asia-southeast1.emqxsl.com:8084/
 
 client.on('connect', () => {
   client.subscribe('esp32/values');
-  client.subscribe('esp32/state')
+  client.subscribe('esp32/state');
+  clietn.subscribe('test');
   console.log('Connected to MQTT broker!');
 });
 
@@ -19,6 +20,13 @@ client.on('message', (topic, message) => {
       document.querySelector('#ammonia .value').textContent = `${data.Ammonia} ppm`;
       document.querySelector('#hydrogen-sulfide .value').textContent = `${data["Hydrogen Sulfide"]} ppm`;
       document.querySelector('#ethylene .value').textContent = `${data.Ethylene} ppm`;
+    }
+
+    if (topic === 'test') {
+      document.querySelector('#ethanol .value').textContent = `${data.etoh}`;
+      document.querySelector('#ammonia .value').textContent = `${data.nh3}`;
+      document.querySelector('#hydrogen-sulfide .value').textContent = `${data"h2s"}`;
+      document.querySelector('#ethylene .value').textContent = `${data.c2h4}`;
     }
 
     if (topic === 'esp32/state') {
