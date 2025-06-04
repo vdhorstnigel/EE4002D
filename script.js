@@ -6,7 +6,7 @@ const client = mqtt.connect('wss://x2124b00.ala.asia-southeast1.emqxsl.com:8084/
 client.on('connect', () => {
   client.subscribe('esp32/values');
   client.subscribe('esp32/state');
-  clietn.subscribe('test');
+  client.subscribe('test');
   console.log('Connected to MQTT broker!');
 });
 
