@@ -1,11 +1,11 @@
 const client = mqtt.connect('wss://x2124b00.ala.asia-southeast1.emqxsl.com:8084/mqtt', {
-  username: 'ESP32',
-  password: 'Password1234!'
+  username: 'viewer',
+  password: 'password'
 });
 
 client.on('connect', () => {
-  client.subscribe('esp32/values');
-  client.subscribe('esp32/state');
+  //client.subscribe('esp32/values');
+  //client.subscribe('esp32/state');
   client.subscribe('test');
   console.log('Connected to MQTT broker!');
 });
