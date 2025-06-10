@@ -25,8 +25,8 @@ client.on('message', (topic, message) => {
     if (topic === 'test') {
       const timestamp = new Date(data.timestamp * 1000);
       document.querySelector('#timestamp .value').textContent = timestamp.toLocaleTimeString("it-IT");
-      document.querySelector('#temperature .value').textContent = `${data.temperature}`;
-      document.querySelector('#humidity .value').textContent = `${data.humidity}`;
+      document.querySelector('#temperature .value').textContent = `${data.temperature}°C`;
+      document.querySelector('#humidity .value').textContent = `${data.humidity}%`;
       document.querySelector('#etoh .value').textContent = `${data.etoh}`;
       document.querySelector('#nh3 .value').textContent = `${data.nh3}`;
       document.querySelector('#h2s .value').textContent = `${data.h2s}`;
