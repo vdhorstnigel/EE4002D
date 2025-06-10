@@ -23,6 +23,10 @@ client.on('message', (topic, message) => {
     }
 
     if (topic === 'test') {
+      const timestamp = new Date(data.timestamp);
+      document.querySelector('#timestamp .value').textContent = `${data.timestamp}`;
+      document.querySelector('#temperature .value').textContent = `${data.temperature}`;
+      document.querySelector('#humidity .value').textContent = `${data.humidity}`;
       document.querySelector('#ethanol .value').textContent = `${data.etoh}`;
       document.querySelector('#ammonia .value').textContent = `${data.nh3}`;
       document.querySelector('#hydrogen-sulfide .value').textContent = `${data.h2s}`;
