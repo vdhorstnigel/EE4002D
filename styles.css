@@ -1,51 +1,150 @@
+/* Base styles */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 10px;
-    background: #f5f5f5;
-  }
-  
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background: linear-gradient(135deg, #e0f7fa, #ffffff);
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.container {
+  max-width: 700px;
+  width: 100%;
+  padding: 20px;
+  /* Use a subtle white background with shadow for the container */
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+/* Header styles */
+h1 {
+  text-align: center;
+  color: #00796b;
+  font-weight: 700;
+  font-size: 2.2rem;
+  margin-bottom: 25px;
+  letter-spacing: 1.5px;
+}
+
+/* Grid for sensor boxes */
+.sensor-box-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* Individual sensor box */
+.sensor-box {
+  background: #fafafa;
+  border-radius: 10px;
+  padding: 18px 22px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 110px;
+}
+
+.sensor-box:hover {
+  box-shadow: 0 8px 20px rgba(0, 121, 107, 0.3);
+  transform: translateY(-5px);
+}
+
+.sensor-box h2 {
+  margin: 0 0 8px 0;
+  color: #004d40;
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-align: center;
+  user-select: none;
+}
+
+.sensor-box .value {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #00796b;
+  user-select: text;
+}
+
+/* Food information box - special styling */
+#foodInfo {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 1.5rem;
+  padding: 18px;
+  border-radius: 12px;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.07);
+  transition: color 0.3s ease, background-color 0.3s ease;
+  user-select: none;
+}
+
+/* Color states for foodInfo */
+#foodInfo.green {
+  color: #2e7d32;
+  background-color: #e8f5e9;
+  border: 1px solid #a5d6a7;
+}
+
+#foodInfo.orange {
+  color: #ef6c00;
+  background-color: #fff3e0;
+  border: 1px solid #ffcc80;
+}
+
+#foodInfo.red {
+  color: #c62828;
+  background-color: #ffebee;
+  border: 1px solid #ef9a9a;
+}
+
+/* Responsive typography */
+@media (max-width: 768px) {
   .container {
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  
-  h1 {
-    text-align: center;
-    color: #333;
-  }
-  
-  .sensor-box {
-    background: white;
-    border-radius: 8px;
     padding: 15px;
-    margin-bottom: 15px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  }
-  
-  .sensor-box h2 {
-    margin: 0 0 5px 0;
-    color: #555;
-    font-size: 1.2rem;
-  }
-  
-  .sensor-box .value {
-    margin: 0;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #0066cc;
-  }
-  
-  /* Mobile responsiveness */
-  @media (max-width: 480px) {
-    .sensor-box {
-      padding: 10px;
-    }
-    h1 {
-      font-size: 1.5rem;
-    }
+    max-width: 100%;
   }
 
-#foodInfo.green { color: green; }
-#foodInfo.orange { color: orange; }
-#foodInfo.red { color: red; }
+  h1 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 15px 10px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    margin-bottom: 18px;
+  }
+
+  .sensor-box {
+    padding: 14px 16px;
+    min-height: 90px;
+  }
+
+  .sensor-box h2 {
+    font-size: 1.1rem;
+  }
+
+  .sensor-box .value {
+    font-size: 1.4rem;
+  }
+
+  #foodInfo {
+    font-size: 1.25rem;
+    padding: 14px;
+    margin-top: 20px;
+  }
+}
