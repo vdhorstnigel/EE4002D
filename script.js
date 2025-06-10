@@ -23,8 +23,8 @@ client.on('message', (topic, message) => {
     }
 
     if (topic === 'test') {
-      const timestamp = new Date(data.timestamp);
-      document.querySelector('#timestamp .value').textContent = `${data.timestamp}`;
+      const timestamp = new Date(data.timestamp * 1000);
+      document.querySelector('#timestamp .value').textContent = timestamp;
       document.querySelector('#temperature .value').textContent = `${data.temperature}`;
       document.querySelector('#humidity .value').textContent = `${data.humidity}`;
       document.querySelector('#ethanol .value').textContent = `${data.etoh}`;
