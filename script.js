@@ -24,13 +24,13 @@ client.on('message', (topic, message) => {
 
     if (topic === 'test') {
       const timestamp = new Date(data.timestamp * 1000);
-      document.querySelector('#timestamp .value').textContent = timestamp;
+      document.querySelector('#timestamp .value').textContent = timestamp.toLocaleTimeString("it-IT");
       document.querySelector('#temperature .value').textContent = `${data.temperature}`;
       document.querySelector('#humidity .value').textContent = `${data.humidity}`;
-      document.querySelector('#ethanol .value').textContent = `${data.etoh}`;
-      document.querySelector('#ammonia .value').textContent = `${data.nh3}`;
-      document.querySelector('#hydrogen-sulfide .value').textContent = `${data.h2s}`;
-      document.querySelector('#ethylene .value').textContent = `${data.c2h4}`;
+      document.querySelector('#etoh .value').textContent = `${data.etoh}`;
+      document.querySelector('#nh3 .value').textContent = `${data.nh3}`;
+      document.querySelector('#h2s .value').textContent = `${data.h2s}`;
+      document.querySelector('#c2h4 .value').textContent = `${data.c2h4}`;
     }
 
     if (topic === 'esp32/state') {
