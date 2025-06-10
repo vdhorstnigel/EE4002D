@@ -15,34 +15,27 @@ body {
   max-width: 700px;
   width: 100%;
   padding: 20px;
-  /* Use a subtle white background with shadow for the container */
   background-color: #fff;
   border-radius: 12px;
   box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
 }
 
-/* Header styles */
-h1 {
-  text-align: center;
-  color: #00796b;
-  font-weight: 700;
-  font-size: 2.2rem;
-  margin-bottom: 25px;
-  letter-spacing: 1.5px;
+/* Top row holding 3 small boxes */
+.top-row {
+  display: flex;
+  gap: 15px;
+  justify-content: space-between;
 }
 
-/* Grid for sensor boxes */
-.sensor-box-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-}
-
-/* Individual sensor box */
-.sensor-box {
+.top-row .small-box {
+  flex: 1;
+  min-width: 0; /* allows box to shrink properly */
   background: #fafafa;
   border-radius: 10px;
-  padding: 18px 22px;
+  padding: 15px 18px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.05);
   transition: box-shadow 0.3s ease, transform 0.3s ease;
   cursor: default;
@@ -50,72 +43,133 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 110px;
+  user-select: none;
 }
 
-.sensor-box:hover {
+.top-row .small-box:hover {
   box-shadow: 0 8px 20px rgba(0, 121, 107, 0.3);
   transform: translateY(-5px);
 }
 
-.sensor-box h2 {
+.small-box h2 {
   margin: 0 0 8px 0;
+  color: #004d40;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.small-box .value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #00796b;
+  user-select: text;
+  margin: 0;
+}
+
+/* Middle grid for 4 medium boxes */
+.middle-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.middle-grid .medium-box {
+  background: #fafafa;
+  border-radius: 10px;
+  padding: 20px 22px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 130px;
+  user-select: none;
+}
+
+.middle-grid .medium-box:hover {
+  box-shadow: 0 8px 20px rgba(0, 121, 107, 0.3);
+  transform: translateY(-5px);
+}
+
+.medium-box h2 {
+  margin: 0 0 10px 0;
   color: #004d40;
   font-size: 1.3rem;
   font-weight: 600;
   text-align: center;
-  user-select: none;
 }
 
-.sensor-box .value {
-  margin: 0;
+.medium-box .value {
   font-size: 1.8rem;
   font-weight: 700;
   color: #00796b;
   user-select: text;
+  margin: 0;
 }
 
-/* Food information box - special styling */
+/* FoodInfo box - full width */
 #foodInfo {
-  margin-top: 30px;
-  text-align: center;
   font-size: 1.5rem;
-  padding: 18px;
+  padding: 20px 25px;
   border-radius: 12px;
   font-weight: 600;
   box-shadow: 0 4px 10px rgba(0,0,0,0.07);
   transition: color 0.3s ease, background-color 0.3s ease;
   user-select: none;
+  text-align: center;
+  background-color: #fff;
+  border: 1px solid transparent;
 }
 
-/* Color states for foodInfo */
+/* Color-coded states */
 #foodInfo.green {
   color: #2e7d32;
   background-color: #e8f5e9;
-  border: 1px solid #a5d6a7;
+  border-color: #a5d6a7;
 }
 
 #foodInfo.orange {
   color: #ef6c00;
   background-color: #fff3e0;
-  border: 1px solid #ffcc80;
+  border-color: #ffcc80;
 }
 
 #foodInfo.red {
   color: #c62828;
   background-color: #ffebee;
-  border: 1px solid #ef9a9a;
+  border-color: #ef9a9a;
 }
 
-/* Responsive typography */
+/* Responsive Adjustments */
 @media (max-width: 768px) {
   .container {
     padding: 15px;
     max-width: 100%;
   }
 
-  h1 {
-    font-size: 1.8rem;
+  .middle-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .small-box h2,
+  .medium-box h2 {
+    font-size: 1.2rem;
+  }
+
+  .small-box .value {
+    font-size: 1.4rem;
+  }
+
+  .medium-box .value {
+    font-size: 1.6rem;
+  }
+
+  #foodInfo {
+    font-size: 1.3rem;
+    padding: 16px 20px;
   }
 }
 
@@ -129,22 +183,25 @@ h1 {
     margin-bottom: 18px;
   }
 
-  .sensor-box {
-    padding: 14px 16px;
-    min-height: 90px;
+  .top-row {
+    flex-direction: column;
+    gap: 15px;
   }
 
-  .sensor-box h2 {
-    font-size: 1.1rem;
+  .top-row .small-box {
+    width: 100%;
   }
 
-  .sensor-box .value {
-    font-size: 1.4rem;
+  .middle-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .medium-box {
+    min-height: 110px;
   }
 
   #foodInfo {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     padding: 14px;
-    margin-top: 20px;
   }
 }

@@ -8,48 +8,50 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mqtt/4.3.7/mqtt.min.js"></script>
 </head>
 <body>
-  <div class="sensor-box-container">
+  <div class="container">
     <h1>Sensor Dashboard</h1>
 
-    <div class="sensor-box" id="timestamp">
-      <h2>Timestamp</h2>
-      <p class="value">--</p>
-    </div>
-
-    <div class="sensor-box" id="temperature">
-      <h2>Temperature</h2>
-      <p class="value">--</p>
-    </div>
-
-    <div class="sensor-box" id="humidity">
-      <h2>Relative Humidity</h2>
-      <p class="value">--</p>
-    </div>
-    
-    <div class="sensor-box" id="ethanol">
-      <h2>Ethanol</h2>
-      <p class="value">--</p>
-    </div>
-    
-    <div class="sensor-box" id="ammonia">
-      <h2>Ammonia</h2>
-      <p class="value">--</p>
-    </div>
-    
-    <div class="sensor-box" id="hydrogen-sulfide">
-      <h2>Hydrogen Sulfide</h2>
-      <p class="value">--</p>
-    </div>
-    
-    <div class="sensor-box" id="ethylene">
-      <h2>Ethylene</h2>
-      <p class="value">--</p>
-    </div>
+    <div class="top-row">
+      <div class="small-box" id="timestamp">
+        <h2>Timestamp</h2>
+        <p class="value">--:--:--</p>
+      </div>
   
-  </div>
-
-  <div id="foodInfo" class="sensor-box" style="text-align: center; font-size: 1.4rem;">
-    Waiting for classification...
+      <div class="small-box" id="humidity">
+        <h2>Humidity</h2>
+        <p class="value">-- %</p>
+      </div>
+  
+      <div class="small-box" id="temperature">
+        <h2>Temperature</h2>
+        <p class="value">-- °C</p>
+      </div>
+    </div>
+      
+    <div class="middle-grid">
+      <div class="medium-box" id="etoh">
+        <h2>EtOH (ppm)</h2>
+        <p class="value">----</p>
+      </div>
+  
+      <div class="medium-box" id="h2s">
+        <h2>H2S (ppm)</h2>
+        <p class="value">----</p>
+      </div>
+  
+      <div class="medium-box" id="ethylene">
+        <h2>Ethylene (ppm)</h2>
+        <p class="value">----</p>
+      </div>
+  
+      <div class="medium-box" id="nh3">
+        <h2>NH3 (ppm)</h2>
+        <p class="value">----</p>
+      </div>
+    </div>
+    
+    <div id="foodInfo" class="green">Waiting for classification...</div>
+  
   </div>
   
   <script src="script.js"></script>
