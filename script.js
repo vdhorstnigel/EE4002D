@@ -3,10 +3,36 @@ const client = mqtt.connect('wss://x2124b00.ala.asia-southeast1.emqxsl.com:8084/
   password: 'password'
 });
 
+const activeAlerts = {
+  Ethanol: false,
+  Ammonia: false,
+  "Hydrogen Sulfide": false,
+  Ethylene: false
+};
+
+function updateAlertBox() {
+  vocListEl.innerHTML = '';
+
+  Object.entries(activeAlerts).forEach(([gas, isActive]) => {
+    if (isActive) {
+      const li = document.createElement('li');
+      li.textContent = `High ${gas} detected`;
+      vocListEl.appendChild(li);
+    }
+  });
+
+  const anyActive = Object.values(activeAlerts).some(value => value === true);
+  vocAlertEl.style.display = anyActive ? 'block' : 'none';
+}
+
+const vocAlertEl = document.getElementById('voc-alert');
+const vocListEl = document.getElementById('voc-list');
+
 client.on('connect', () => {
   //client.subscribe('esp32/values');
   //client.subscribe('esp32/state');
   client.subscribe('test');
+  client.subscribe('test/alerts');
   console.log('Connected to MQTT broker!');
 });
 
@@ -45,6 +71,15 @@ client.on('message', (topic, message) => {
       else if (state === "Spoiling") foodInfoEl.classList.add("orange");
       else if (state === "Spoilt") foodInfoEl.classList.add("red");
     }
+
+      if (topic === 'alerts') {
+        if ('etoh_anomaly' in data) activeAlerts["Ethanol"] = data.etoh_anomaly;
+        if ('nh3_anomaly' in data) activeAlerts["Ammonia"] = data.nh3_anomaly;
+        if ('h2s_anomaly' in data) activeAlerts["Hydrogen Sulfide"] = data.h2s_anomaly;
+        if ('c2h4_anomaly' in data) activeAlerts["Ethylene"] = data.c2h4_anomaly;
+
+        updateAlertBox();
+      }
   } catch (error) {
     console.error('Error parsing message data:', error);
   }
