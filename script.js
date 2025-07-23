@@ -72,7 +72,7 @@ client.on('message', (topic, message) => {
       else if (state === "Spoilt") foodInfoEl.classList.add("red");
     }
 
-      if (topic === 'alerts') {
+      if (topic === 'test/alerts') {
         if ('etoh_anomaly' in data) activeAlerts["Ethanol"] = data.etoh_anomaly;
         if ('nh3_anomaly' in data) activeAlerts["Ammonia"] = data.nh3_anomaly;
         if ('h2s_anomaly' in data) activeAlerts["Hydrogen Sulfide"] = data.h2s_anomaly;
