@@ -12,10 +12,10 @@ const activeAlerts = {
 
 function updateAlertBox() {
   const gases = {
-    "Ethanol": "ethanol",
-    "Ammonia": "ammonia",
-    "Hydrogen Sulfide": "hydrogen-sulfide",
-    "Ethylene": "ethylene"
+    "Ethanol": "etoh",
+    "Ammonia": "nh3",
+    "Hydrogen Sulfide": "h2s",
+    "Ethylene": "c2h4"
   };
 
   for (const [name, id] of Object.entries(gases)) {
