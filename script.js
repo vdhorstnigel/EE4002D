@@ -32,9 +32,6 @@ function updateAlertBox() {
   }
 }
 
-const vocAlertEl = document.getElementById('voc-alert');
-const vocListEl = document.getElementById('voc-list');
-
 client.on('connect', () => {
   //client.subscribe('esp32/values');
   //client.subscribe('esp32/state');
