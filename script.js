@@ -11,18 +11,25 @@ const activeAlerts = {
 };
 
 function updateAlertBox() {
-  vocListEl.innerHTML = '';
+  const gases = {
+    "Ethanol": "ethanol",
+    "Ammonia": "ammonia",
+    "Hydrogen Sulfide": "hydrogen-sulfide",
+    "Ethylene": "ethylene"
+  };
 
-  Object.entries(activeAlerts).forEach(([gas, isActive]) => {
-    if (isActive) {
-      const li = document.createElement('li');
-      li.textContent = `High ${gas} detected`;
-      vocListEl.appendChild(li);
+  for (const [name, id] of Object.entries(gases)) {
+    const box = document.getElementById(id);
+    const alertMsg = box.querySelector('.alert-msg');
+
+    if (activeAlerts[name]) {
+      box.classList.add('alert');
+      alertMsg.style.display = 'block';
+    } else {
+      box.classList.remove('alert');
+      alertMsg.style.display = 'none';
     }
-  });
-
-  const anyActive = Object.values(activeAlerts).some(value => value === true);
-  vocAlertEl.style.display = anyActive ? 'block' : 'none';
+  }
 }
 
 const vocAlertEl = document.getElementById('voc-alert');

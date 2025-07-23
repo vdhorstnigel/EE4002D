@@ -23,6 +23,19 @@ body {
   gap: 25px;
 }
 
+.alert-msg {
+  margin-top: 10px;
+  font-size: 0.95rem;
+  color: #cc0000;
+  font-weight: bold;
+  display: none;
+}
+
+.sensor-box.alert {
+  border: 2px solid #cc0000;
+  background-color: #ffe5e5;
+}
+
 /* Top row holding 3 small boxes */
 .top-row {
   display: flex;
