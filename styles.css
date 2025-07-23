@@ -31,10 +31,6 @@ body {
   display: none;
 }
 
-.sensor-box.alert {
-  border: 2px solid #cc0000;
-  background-color: #ffe5e5;
-}
 
 /* Top row holding 3 small boxes */
 .top-row {
