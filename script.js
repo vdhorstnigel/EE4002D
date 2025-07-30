@@ -1,6 +1,8 @@
-const client = mqtt.connect('wss://x2124b00.ala.asia-southeast1.emqxsl.com:8084/mqtt', {
-  username: 'viewer',
-  password: 'password'
+const client = awsIot.device({
+   keyPath: 'viewer-private.pem.key',        
+   certPath: 'viewer.pem.crt',   
+   caPath: 'root-CA.crt',            
+   host: 'a1b6i5epm615hz-ats.iot.ap-southeast-1.amazonaws.com'
 });
 
 const activeAlerts = {
@@ -35,8 +37,8 @@ function updateAlertBox() {
 client.on('connect', () => {
   //client.subscribe('esp32/values');
   //client.subscribe('esp32/state');
-  client.subscribe('test');
-  client.subscribe('test/alerts');
+  client.subscribe('data');
+  client.subscribe('alerts');
   console.log('Connected to MQTT broker!');
 });
 
@@ -45,14 +47,7 @@ client.on('message', (topic, message) => {
     const data = JSON.parse(message.toString());
     console.log('Received message on topic:', topic, 'with data:', data); // Log the received message
 
-    if (topic === 'esp32/values') {
-      document.querySelector('#ethanol .value').textContent = `${data.Ethanol} ppm`;
-      document.querySelector('#ammonia .value').textContent = `${data.Ammonia} ppm`;
-      document.querySelector('#hydrogen-sulfide .value').textContent = `${data["Hydrogen Sulfide"]} ppm`;
-      document.querySelector('#ethylene .value').textContent = `${data.Ethylene} ppm`;
-    }
-
-    if (topic === 'test') {
+    if (topic === 'data') {
       const timestamp = new Date(data.timestamp * 1000);
       document.querySelector('#timestamp .value').textContent = timestamp.toLocaleTimeString("it-IT");
       document.querySelector('#temperature .value').textContent = `${data.temperature}°C`;
@@ -63,27 +58,28 @@ client.on('message', (topic, message) => {
       document.querySelector('#c2h4 .value').textContent = `${data.c2h4}`;
     }
 
-    if (topic === 'esp32/state') {
-      console.log('Updating food state');
-      const foodInfoEl = document.getElementById('foodInfo');
-      const state = data["State"];
-      foodInfoEl.textContent = `${data["Type of Food"]}: ${data["Specific food"]} (${state})`;
+  if (topic === 'alerts') {
+      if ('etoh_anomaly' in data) activeAlerts["Ethanol"] = data.etoh_anomaly;
+      if ('nh3_anomaly' in data) activeAlerts["Ammonia"] = data.nh3_anomaly;
+      if ('h2s_anomaly' in data) activeAlerts["Hydrogen Sulfide"] = data.h2s_anomaly;
+      if ('c2h4_anomaly' in data) activeAlerts["Ethylene"] = data.c2h4_anomaly;
 
-      // Optional color based on state
-      foodInfoEl.classList.remove("green", "orange", "red"); // Remove any old color classes
-      if (state === "Fresh") foodInfoEl.classList.add("green");
-      else if (state === "Spoiling") foodInfoEl.classList.add("orange");
-      else if (state === "Spoilt") foodInfoEl.classList.add("red");
+      updateAlertBox();
     }
 
-      if (topic === 'test/alerts') {
-        if ('etoh_anomaly' in data) activeAlerts["Ethanol"] = data.etoh_anomaly;
-        if ('nh3_anomaly' in data) activeAlerts["Ammonia"] = data.nh3_anomaly;
-        if ('h2s_anomaly' in data) activeAlerts["Hydrogen Sulfide"] = data.h2s_anomaly;
-        if ('c2h4_anomaly' in data) activeAlerts["Ethylene"] = data.c2h4_anomaly;
+  if (topic === 'esp32/state') {
+    console.log('Updating food state');
+    const foodInfoEl = document.getElementById('foodInfo');
+    const state = data["State"];
+    foodInfoEl.textContent = `${data["Type of Food"]}: ${data["Specific food"]} (${state})`;
 
-        updateAlertBox();
-      }
+    // Optional color based on state
+    foodInfoEl.classList.remove("green", "orange", "red"); // Remove any old color classes
+    if (state === "Fresh") foodInfoEl.classList.add("green");
+    else if (state === "Spoiling") foodInfoEl.classList.add("orange");
+    else if (state === "Spoilt") foodInfoEl.classList.add("red");
+  }
+
   } catch (error) {
     console.error('Error parsing message data:', error);
   }
