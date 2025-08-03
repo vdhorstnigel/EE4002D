@@ -36,6 +36,7 @@ client.on('connect', () => {
   client.subscribe('ESP32/state');
   client.subscribe('ESP32/data');
   client.subscribe('ESP32/alerts');
+  client.subscribe('test');
   console.log('Connected to MQTT broker!');
 });
 
