@@ -51,7 +51,9 @@ client.on('connect', () => {
 client.on('message', (topic, message) => {
   if (topic === 'ESP32/logs'){
     const text = message.toString();
-     const regex = /DIM (\w+), Raw anomaly score: [\d.]+, min dist: [\d.]+, max dist: [\d.]+, centroid: ([\d.]+)/;
+    console.log('Received message on topic:', topic, 'with message:', text);
+    const regex = /DIM (\w+), Raw anomaly score: [\d.]+, min dist: [\d.]+, max dist: [\d.]+, centroid: ([\d.]+)/;
+    const match = text.match(regex);
     if (match) {
       const dim = match[1].toLowerCase();
       const centroid = parseFloat(match[2]);
