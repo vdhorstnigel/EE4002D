@@ -51,11 +51,10 @@ client.on('connect', () => {
 client.on('message', (topic, message) => {
   if (topic === 'ESP32/logs'){
     const text = message.toString();
-    const match = text.match(/Training completed for dim (\w+)\. Training count: \d+\. Centroid: ([0-9.]+)/);
+     const regex = /DIM (\w+), Raw anomaly score: [\d.]+, min dist: [\d.]+, max dist: [\d.]+, centroid: ([\d.]+)/;
     if (match) {
       const dim = match[1].toLowerCase();
       const centroid = parseFloat(match[2]);
-
       if (idMap[dim]) {
         const box = document.querySelector(`#${idMap[dim]} .centroid`);
         if (box) box.textContent = `Average value: ${centroid.toFixed(2)}`;
