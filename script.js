@@ -10,6 +10,13 @@ const activeAlerts = {
   Ethylene: false
 };
 
+const idMap = {
+  etoh: 'etoh',
+  nh3: 'nh3',
+  h2s: 'h2s',
+  c2h4: 'c2h4'
+};
+
 function updateAlertBox() {
   const gases = {
     "Ethanol": "etoh",
@@ -36,11 +43,26 @@ client.on('connect', () => {
   client.subscribe('ESP32/state');
   client.subscribe('ESP32/data');
   client.subscribe('ESP32/alerts');
+  client.subscribe('ESP32/logs')
   client.subscribe('test');
   console.log('Connected to MQTT broker!');
 });
 
 client.on('message', (topic, message) => {
+  if (topic === 'ESP32/logs'){
+    const text = message.toString();
+    const match = text.match(/Training completed for dim (\w+)\. Training count: \d+\. Centroid: ([0-9.]+)/);
+    if (match) {
+      const dim = match[1].toLowerCase();
+      const centroid = parseFloat(match[2]);
+
+      if (idMap[dim]) {
+        const box = document.querySelector(`#${idMap[dim]} .centroid`);
+        if (box) box.textContent = `Average value: ${centroid.toFixed(2)}`;
+      }
+
+    }
+  }
   try {
     const data = JSON.parse(message.toString());
     console.log('Received message on topic:', topic, 'with data:', data);
