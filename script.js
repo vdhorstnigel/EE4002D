@@ -84,9 +84,9 @@ client.on('message', (topic, message) => {
         console.log('Updating food state');
         const foodInfoEl = document.getElementById('foodInfo');
         const state = data["State"];
-        const type = data["Type"]
-        const foodInfo = data["foodInfo"]
-        const confidence = data["Confidence"] * 100
+        const type = data["Type"];
+        const foodInfo = data["foodInfo"];
+        const confidence = (data["Confidence"] * 100).toFixed(2);
         foodInfoEl.textContent = `${type}: ${foodInfo} (${state}, Confidence: ${confidence}%) `;
 
         // Optional color based on state
